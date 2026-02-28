@@ -1511,9 +1511,8 @@
         const API = (() => {
             const h = window.location.hostname;
             const p = parseInt(window.location.port, 10) || (window.location.protocol === 'https:' ? 443 : 80);
-            if ((h === '127.0.0.1' || h === 'localhost') && p !== 5000) return 'http://127.0.0.1:5000';
-            if (window.location.protocol === 'http:' || window.location.protocol === 'https:') return window.location.origin;
-            return 'http://127.0.0.1:5000';
+            if (h === '127.0.0.1' || h === 'localhost') return p === 5000 ? window.location.origin : 'http://127.0.0.1:5000';
+            return window.location.origin;
         })();
 
         document.addEventListener('DOMContentLoaded', () => {
